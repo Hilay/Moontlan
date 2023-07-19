@@ -416,7 +416,7 @@ export default function Home() {
         <div className="group col-span-3 h-full">
           <a
             target="_black"
-            href="https://github.com/Hilay"
+            href="https://github.com/Moontlan"
             className="group h-full w-full flex flex-col transform-gpu justify-between transition-all duration-500 group-hover:scale-95"
           >
             <span className="absolute h-full">
