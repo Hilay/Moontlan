@@ -1,8 +1,32 @@
+"use client";
 import Image from "next/image";
 import Me from "../public/Me.jpg";
-import MapImg from "../public/map.png"
+import MapImg from "../public/map.png";
+import { useState, useEffect } from "react";
+import { utcToZonedTime, format } from "date-fns-tz";
 
 export default function Home() {
+  const [hour, setHour] = useState("");
+
+  useEffect(() => {
+    const currentTime = new Date();
+    const boliviaTime = utcToZonedTime(currentTime, "America/La_Paz");
+    const newHour = format(boliviaTime, "HH:mm");
+
+    setHour(newHour);
+
+    const interval = setInterval(() => {
+      const currentTime = new Date();
+      const boliviaTime = utcToZonedTime(currentTime, "America/La_Paz");
+      const newHour = format(boliviaTime, "HH:mm");
+      setHour(newHour);
+    }, 60000); // Actualizar cada 1 minuto (60000 milisegundos)
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <main className="bg-p1 min-h-screen flex items-center justify-center relative">
       <section className="z-50 opacity-[0.03] bg-back fixed inset-0 overflow-hidden pointer-events-none"></section>
@@ -11,8 +35,8 @@ export default function Home() {
         <div className="col-span-4">
           <div className="bg-[#f0e8d6] rounded-3xl flex flex-row justify-center items-top h-60 relative">
             <div className="h-full absolute inset-0">
-              <div className="text-black h-3/5 flex items-center justify-center w-full pt-12">
-                <h2 className="text-lg text-center font-semibold">
+              <div className="text-black h-4/5 md:h-3/5 flex items-center justify-center w-full pt-12">
+                <h2 className="text-lg text-center font-semibold px-4">
                   🍁 Alan Montaño
                   <span className="text-sm block text-gray-500 font-light">
                     Systems engineering student and Full stack developer
@@ -20,7 +44,7 @@ export default function Home() {
                 </h2>
               </div>
               <img
-                className="h-2/5 w-full object-cover rounded-3xl"
+                className="h-1/5 md:h-2/5  w-full object-cover rounded-3xl"
                 src="https://i.etsystatic.com/25978079/r/il/a1a6f0/3107485501/il_1588xN.3107485501_9lqd.jpg"
               ></img>
             </div>
@@ -34,11 +58,7 @@ export default function Home() {
         <div className="col-span-2 md:col-span-1 grid grid-rows-2 gap-6">
           <div className="bg-p3 rounded-3xl flex justify-center items-center">
             <label className="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                className="sr-only peer"
-              />
+              <input type="checkbox" value="" className="sr-only peer" />
               <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-orange-500"></div>
             </label>
           </div>
@@ -51,9 +71,13 @@ export default function Home() {
           </div>
         </div>
         <div className="group col-span-2 md:col-span-1 grid grid-rows-2 gap-6">
-          <a href="#" target="_blank" className="bg-[#b3c5cb] rounded-3xl flex justify-center items-center group group-hover:scale-90 duration-500">
+          <a
+            href="#"
+            target="_blank"
+            className="bg-[#b3c5cb] rounded-3xl flex justify-center items-center group group-hover:scale-90 duration-500"
+          >
             <span className="flex flex-col items-center justify-center">
-              <p className="text-sm">English Level</p>
+              <p className="text-sm">English</p>
               <h2 className="text-3xl font-semibold">C1</h2>
               <p>EF SET</p>
             </span>
@@ -76,14 +100,13 @@ export default function Home() {
             <div className="flex flex-col items-center justify-between px-6 py-8 space-y-10 z-10 h-full">
               <span className="flex flex-row justify-between w-full h-full">
                 <svg
-                  fill="white"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-name="Layer 1"
-                  viewBox="0 0 24 24"
-                  id="github"
-                  width={30}
+                  width="30"
+                  height="30"
+                  fill="currentColor"
+                  viewBox="0 0 640 512"
                 >
-                  <path d="M10.07031,20.50291a1.00008,1.00008,0,0,0-1.18115-.9834c-1.30908.24024-2.96191.27637-3.40137-.958a5.70754,5.70754,0,0,0-1.83691-2.415,1.20073,1.20073,0,0,1-.1665-.10938,1,1,0,0,0-.93067-.64551H2.54883a.99965.99965,0,0,0-1,.99512c-.00391.81543.811,1.33789,1.1416,1.51465a4.4408,4.4408,0,0,1,.92383,1.35937c.36426,1.02344,1.42285,2.57617,4.46582,2.376.001.03516.00195.06836.00244.09863l.00439.26758a1,1,0,0,0,2,0l-.00488-.31836C10.07715,21.4951,10.07031,21.22068,10.07031,20.50291Zm10.667-15.126c.03174-.125.063-.26367.09034-.41992a6.27792,6.27792,0,0,0-.40821-3.293,1.002,1.002,0,0,0-.61572-.58007c-.356-.12012-1.67041-.35645-4.18408,1.25a13.86918,13.86918,0,0,0-6.354,0C6.76221.751,5.45459.9658,5.10205,1.07908a.99744.99744,0,0,0-.63135.584,6.3003,6.3003,0,0,0-.40332,3.35644c.02442.12793.05078.2461.07813.35449A6.26928,6.26928,0,0,0,2.89014,9.20311a8.42168,8.42168,0,0,0,.04248.92187c.334,4.60254,3.334,5.98438,5.42431,6.459-.04345.125-.083.25878-.11816.40039a1.00023,1.00023,0,0,0,1.94238.47851,1.6784,1.6784,0,0,1,.46778-.87793.99947.99947,0,0,0-.5459-1.74512c-3.4541-.39453-4.95362-1.80175-5.1792-4.89843a6.61076,6.61076,0,0,1-.03369-.73828,4.25769,4.25769,0,0,1,.91943-2.71289,3.022,3.022,0,0,1,.1958-.23145.99988.99988,0,0,0,.188-1.02441,3.3876,3.3876,0,0,1-.15527-.55567A4.09356,4.09356,0,0,1,6.1167,3.06346a7.54263,7.54263,0,0,1,2.415,1.17968,1.00877,1.00877,0,0,0,.82764.13282,11.77716,11.77716,0,0,1,6.17285.001,1.00549,1.00549,0,0,0,.83056-.13769,7.572,7.572,0,0,1,2.40528-1.19043,4.03977,4.03977,0,0,1,.0874,1.57812,3.205,3.205,0,0,1-.16895.60743.9999.9999,0,0,0,.188,1.02441c.07715.08691.1543.18066.22363.26855A4.12186,4.12186,0,0,1,20,9.20311a7.03888,7.03888,0,0,1-.0376.77734c-.22021,3.05566-1.72558,4.46387-5.1958,4.85937a1,1,0,0,0-.54541,1.7461,1.63079,1.63079,0,0,1,.46631.9082,3.06079,3.06079,0,0,1,.09229.81934v2.334C14.77,21.2949,14.77,21.78025,14.77,22.00291a1,1,0,1,0,2,0c0-.2168,0-.69238.00977-1.33984V18.31346a4.8815,4.8815,0,0,0-.15479-1.31153,4.25638,4.25638,0,0,0-.11621-.416,6.51258,6.51258,0,0,0,5.44531-6.42383A8.69677,8.69677,0,0,0,22,9.20311,6.13062,6.13062,0,0,0,20.7373,5.37693Z"></path>
+                  <path d="M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z" />
                 </svg>
                 <svg
                   className="group-hover:scale-125 duration-500"
@@ -100,15 +123,18 @@ export default function Home() {
               <span className="rounded-3xl w-full h-full">
                 <h2 className="font-semibold md:text-2xl md:pb-3">Projects</h2>
                 <span className="font-light text-sm md:text-xl">
-                  Look at my creations, university projects and everything I
-                  make come true
+                  Look at my projects and expirience that i have been working
                 </span>
               </span>
             </div>
           </a>
         </div>
         <div className="relative group col-span-2 md:col-span-2 flex items-center justify-center rounded-xl">
-          <a className="group bg-blue-400 h-full w-full flex items-center justify-center group-hover:scale-95 pointer-events-auto duration-500 rounded-3xl" href="https://www.linkedin.com/in/alanmonta%C3%B1o/" target="_black">
+          <a
+            className="group bg-blue-400 h-full w-full flex items-center justify-center group-hover:scale-95 pointer-events-auto duration-500 rounded-3xl"
+            href="https://www.linkedin.com/in/alanmonta%C3%B1o/"
+            target="_black"
+          >
             <span className="group group-hover:scale-[1.3] transform-cpu duration-500">
               <svg
                 stroke="currentColor"
@@ -398,7 +424,7 @@ export default function Home() {
         <div className="col-span-3 grid grid-cols-1 gap-6 md:col-span-1">
           <div className="bg-[#2a634e] rounded-xl flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-2xl">03:47</h2>
+              <h2 className="text-2xl">{hour}</h2>
               <p className="text-xs">In Bolivia</p>
             </div>
           </div>
@@ -525,7 +551,11 @@ export default function Home() {
         </div>
 
         <div className="group col-span-6 md:col-span-4  h-52">
-          <a className="group h-full flex relative rounded-xl group-hover:scale-95 duration-500">
+          <a
+            href="https://open.spotify.com/playlist/35Uqe0UfZphXoKOpUeSVQz?si=ed7af0e43a85472a"
+            target="_blank"
+            className="group h-full flex relative rounded-xl group-hover:scale-95 duration-500"
+          >
             <span className="h-full absolute inset-0">
               <img
                 className="h-full w-full object-cover flex rounded-xl z-0 brightness-50"
@@ -563,10 +593,10 @@ export default function Home() {
               <div className="space-y-0.5">
                 <h2 className="font-light">
                   playlist:
-                  <span className="font-semibold block">bedtime dnb</span>
+                  <span className="font-semibold block">Kyoto 🌸</span>
                 </h2>
                 <p className="text-sm">
-                  Drum and bass to send you to sleep, or host afters with.
+                  To be chill or just feel it on a car trip.
                 </p>
               </div>
             </span>
