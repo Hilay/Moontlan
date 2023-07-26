@@ -85,7 +85,7 @@ export default function Home() {
           <div className="bg-[#f5c709] rounded-3xl flex items-center justify-center">
             <h2 className="text-center text-xs">
               AGE
-              <span className="block text-3xl font-bold">25</span>
+              <span className="block text-3xl font-bold">21</span>
               YEAR OLD
             </h2>
           </div>
