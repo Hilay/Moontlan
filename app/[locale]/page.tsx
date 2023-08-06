@@ -74,8 +74,8 @@ export default function Home() {
               <input
                 type="checkbox"
                 className="sr-only peer"
-                checked={resolvedTheme == "dark" ? false : true}
-                onClick={() => {
+                defaultChecked={resolvedTheme === 'light'}
+                onChange={() => {
                   setTheme(resolvedTheme == "dark" ? "light" : "dark");
                 }}
               />
