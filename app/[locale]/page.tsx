@@ -41,11 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-<<<<<<< HEAD:app/[locale]/page.tsx
-    <main className="dark:bg-p1 bg-gray-300 min-h-screen flex items-center justify-center relative">
-=======
-    <main className="bg-p1 min-h-screen flex items-center justify-center relative text-white">
->>>>>>> 8934b49f23dfc3f3830c55f7a279aa7b75073933:app/page.tsx
+    <main className="dark:bg-p1 bg-gray-300 min-h-screen flex items-center justify-center relative text-white">
       <section className="z-50 opacity-[0.03] bg-back fixed inset-0 overflow-hidden pointer-events-none"></section>
 
       <div className="grid grid-cols-6 max-w-5xl px-6 pb-40 pt-20 gap-6">
