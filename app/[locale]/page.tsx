@@ -41,7 +41,11 @@ export default function Home() {
   }, []);
 
   return (
+<<<<<<< HEAD:app/[locale]/page.tsx
     <main className="dark:bg-p1 bg-gray-300 min-h-screen flex items-center justify-center relative">
+=======
+    <main className="bg-p1 min-h-screen flex items-center justify-center relative text-white">
+>>>>>>> 8934b49f23dfc3f3830c55f7a279aa7b75073933:app/page.tsx
       <section className="z-50 opacity-[0.03] bg-back fixed inset-0 overflow-hidden pointer-events-none"></section>
 
       <div className="grid grid-cols-6 max-w-5xl px-6 pb-40 pt-20 gap-6">
@@ -482,7 +486,7 @@ export default function Home() {
             href="https://github.com/Moontlan"
             className="group h-full w-full flex flex-col transform-gpu justify-between transition-all duration-500 group-hover:scale-95"
           >
-            <span className="absolute h-full">
+            <span className="absolute h-full w-full">
               <img
                 className="h-full w-full object-cover rounded-3xl"
                 src="https://i.pinimg.com/originals/ea/77/2f/ea772f847ec65f0c7f7f8cae425bad23.gif"
