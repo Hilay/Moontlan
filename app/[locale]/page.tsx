@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Image from "next/image";
 import Me from "../../public/Me.jpg";
 import MapImg from "../../public/map.png";
@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 
 export default function Home() {
   const [hour, setHour] = useState("");
-  const { resolvedTheme, theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const t = useTranslations("Index");
   const router = useRouter();
   const locale = useLocale();
