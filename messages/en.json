@@ -1,0 +1,31 @@
+{
+  "Index": {
+    "title": "Hello world!",
+    "about": "Systems engineering and full stack developer",
+    "EF": "English",
+    "age": {
+      "index": "Age",
+      "years": "Years Old"
+    },
+    "project": {
+      "title": "Projects",
+      "description": "Look at my projects and expirience that i have been working"
+    },
+    "hour": "In Bolivia",
+    "github": "My open source work & contributions.",
+    "me": {
+      "title": "Hello world! ",
+      "l1": "My name is Alan, I'm a systems engineer from Bolivia. I've been programming for as long as I can remember. Actually i'm spending my time on the world of linux with arch.",
+      "l2": "Beyond that, I'm really interested in AI development, and you can often catch me spending time on it."
+    },
+    "discord": {
+      "off": "Offline",
+      "on": "Online"
+    },
+    "spotify": {
+      "title": "playlist:",
+      "description": "to be chill or just fill it on a car trip"
+    },
+    "experience": "YEARS OF EXPERIENCE"
+  }
+}

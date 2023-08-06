@@ -1,0 +1,31 @@
+{
+  "Index": {
+    "title": "Hola Mundo!",
+    "about": "Ingeniero de sistemas y desarrollador full stack",
+    "EF": "Ingles",
+    "age": {
+      "index": "Edad",
+      "years": "Años"
+    },
+    "project": {
+      "title": "Projectos",
+      "description": "Mira mis proyectos y la experiencia que he estado trabajando"
+    },
+    "hour": "En Bolivia",
+    "github": "Mi trabajo de codigo abierto y contribuciones.",
+    "me": {
+      "title": "Hola Mundo! ",
+      "l1": "Mi nombre es Alan, soy ingeniero de sistemas de Bolivia. He estado programando desde que tengo memoria. Actualmente estoy pasando mi tiempo en el mundo de Linux con Arch.",
+      "l2": "Más allá de eso, estoy realmente interesado en el desarrollo de la IA y, a menudo puedes encontrarme dedicando tiempo a ello."
+    },
+    "discord": {
+      "off": "Desconectado",
+      "on": "Conectado"
+    },
+    "spotify": {
+      "title": "lista de reproduccion:",
+      "description": "para relajarse o un viaje en coche"
+    },
+    "experience": "AÑOS DE EXPERIENCIA"
+  }
+}

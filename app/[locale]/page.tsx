@@ -1,12 +1,25 @@
 "use client";
 import Image from "next/image";
-import Me from "../public/Me.jpg";
-import MapImg from "../public/map.png";
+import Me from "../../public/Me.jpg";
+import MapImg from "../../public/map.png";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { utcToZonedTime, format } from "date-fns-tz";
+import { useRouter, usePathname } from "next-intl/client";
+import { useTheme } from "next-themes";
 
 export default function Home() {
   const [hour, setHour] = useState("");
+  const { resolvedTheme, theme, setTheme } = useTheme();
+  const t = useTranslations("Index");
+  const router = useRouter();
+  const locale = useLocale();
+  const pathname = usePathname();
+
+  const lenguageChange = () => {
+    const newLenguage = locale == "es" ? "en" : "es";
+    router.replace(pathname, { locale: newLenguage });
+  };
 
   useEffect(() => {
     const currentTime = new Date();
@@ -28,7 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-p1 min-h-screen flex items-center justify-center relative">
+    <main className="dark:bg-p1 bg-gray-300 min-h-screen flex items-center justify-center relative">
       <section className="z-50 opacity-[0.03] bg-back fixed inset-0 overflow-hidden pointer-events-none"></section>
 
       <div className="grid grid-cols-6 max-w-5xl px-6 pb-40 pt-20 gap-6">
@@ -38,8 +51,8 @@ export default function Home() {
               <div className="text-black h-4/5 md:h-3/5 flex items-center justify-center w-full pt-12">
                 <h2 className="text-lg text-center font-semibold px-4">
                   🍁 Alan Montaño
-                  <span className="text-sm block text-gray-500 font-light">
-                    Systems engineering student and Full stack developer
+                  <span className="text-sm block text-gray-500 font-semibold pt-2">
+                    {t("about")}
                   </span>
                 </h2>
               </div>
@@ -58,15 +71,37 @@ export default function Home() {
         <div className="col-span-2 md:col-span-1 grid grid-rows-2 gap-6">
           <div className="bg-p3 rounded-3xl flex justify-center items-center">
             <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" value="" className="sr-only peer" />
+              <input
+                type="checkbox"
+                className="sr-only peer"
+                checked={resolvedTheme == "dark" ? false : true}
+                onClick={() => {
+                  setTheme(resolvedTheme == "dark" ? "light" : "dark");
+                }}
+              />
               <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-orange-500"></div>
             </label>
           </div>
-          <div className="bg-p2 rounded-3xl flex items-center justify-center">
+          <div
+            className="bg-p2 rounded-3xl flex items-center justify-center hover:scale-90 duration-500 hover:cursor-pointer"
+            onClick={lenguageChange}
+          >
             <span className="grid grid-cols-2">
-              <h2 className="col-span-2 text-4xl">EN</h2>
-              <p className="col-span-1 text-center">ES</p>
-              <p className="col-span-1 text-center text-p3">EN</p>
+              <h2 className="col-span-2 text-5xl">{locale.toUpperCase()}</h2>
+              <p
+                className={`col-span-1 text-center ${
+                  locale == "es" ? "text-p3" : ""
+                }`}
+              >
+                ES
+              </p>
+              <p
+                className={`col-span-1 text-center ${
+                  locale == "en" ? "text-p3" : ""
+                }`}
+              >
+                EN
+              </p>
             </span>
           </div>
         </div>
@@ -77,16 +112,16 @@ export default function Home() {
             className="bg-[#b3c5cb] rounded-3xl flex justify-center items-center group group-hover:scale-90 duration-500"
           >
             <span className="flex flex-col items-center justify-center">
-              <p className="text-sm">English</p>
+              <p className="text-base">{t("EF")}</p>
               <h2 className="text-3xl font-semibold">C1</h2>
               <p>EF SET</p>
             </span>
           </a>
           <div className="bg-[#f5c709] rounded-3xl flex items-center justify-center">
-            <h2 className="text-center text-xs">
-              AGE
+            <h2 className="text-center text-sm sm:text-base">
+              {t("age.index")}
               <span className="block text-3xl font-bold">21</span>
-              YEAR OLD
+              {t("age.years")}
             </h2>
           </div>
         </div>
@@ -121,9 +156,11 @@ export default function Home() {
                 </svg>
               </span>
               <span className="rounded-3xl w-full h-full">
-                <h2 className="font-semibold md:text-2xl md:pb-3">Projects</h2>
+                <h2 className="font-semibold md:text-2xl md:pb-3">
+                  {t("project.title")}
+                </h2>
                 <span className="font-light text-sm md:text-xl">
-                  Look at my projects and expirience that i have been working
+                  {t("project.description")}
                 </span>
               </span>
             </div>
@@ -422,21 +459,21 @@ export default function Home() {
           </div>
         </div>
         <div className="col-span-3 grid grid-cols-1 gap-6 md:col-span-1">
-          <div className="bg-[#2a634e] rounded-xl flex items-center justify-center">
-            <div className="text-center">
+          <div className="bg-[#2a634e] rounded-3xl flex items-center justify-center">
+            <div className="text-center p-3">
               <h2 className="text-2xl">{hour}</h2>
-              <p className="text-xs">In Bolivia</p>
+              <p className="text-xs">{t("hour")}</p>
             </div>
           </div>
-          <div className="bg-[#6483bd] rounded-xl flex items-center justify-center">
-            <div className="flex items-center justify-center">
-              <p className="text-center text-xs">
-                <span className="text-xl">109</span> days
+          <a className="bg-[#6483bd] rounded-3xl flex items-center justify-center">
+            <span className="flex items-center justify-center">
+              <p className="text-center text-xs sm:text-sm p-3">
+                <span className="text-3xl sm:text-4xl font-bold">+2</span>
                 <br />
-                until birthday
+                {t("experience")}
               </p>
-            </div>
-          </div>
+            </span>
+          </a>
         </div>
 
         <div className="group col-span-3 h-full">
@@ -451,7 +488,7 @@ export default function Home() {
                 src="https://i.pinimg.com/originals/ea/77/2f/ea772f847ec65f0c7f7f8cae425bad23.gif"
                 alt=""
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-neutral-900/20 rounded-xl"></span>
+              <span className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-neutral-900/20 rounded-3xl"></span>
             </span>
             <span className="z-10 flex justify-between px-6 pt-6">
               <svg
@@ -482,27 +519,17 @@ export default function Home() {
             </span>
             <span className="z-10 space-y-0.5 px-6 pb-6 pt-3">
               <span className="block font-light">Github</span>
-              <span className="block text-sm">
-                My open source work & contributions.
-              </span>
+              <span className="block text-sm">{t("github")}</span>
             </span>
           </a>
         </div>
-        <div className="col-span-6 bg-[#3d437d] rounded-xl p-6 space-y-3 md:col-span-4">
+        <div className="col-span-6 bg-[#3d437d] rounded-3xl p-6 space-y-3 md:col-span-4">
           <h2>
-            Hello World
+            {t("me.title")}
             <span>🍁</span>
           </h2>
-          <p>
-            {
-              "My name is Alan, I'm a systems engineer from Bolivia. I've been programming for as long as I can remember. Actually i'm spending my time on the world of linux with arch."
-            }
-          </p>
-          <p>
-            {
-              "Beyond that, I'm really interested in AI development, and you can often catch me spending time on it."
-            }
-          </p>
+          <p>{t("me.l1")}</p>
+          <p>{t("me.l2")}</p>
         </div>
 
         <div className="col-span-3 min-h-[13rem] flex relative md:col-span-2">
@@ -525,8 +552,12 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="col-span-3 text-4xl md:col-span-2">
-          <div className="text-center scale-[1] space-y-1 bg-purple-500 rounded-xl flex items-center flex-col justify-center h-full">
+        <div
+          className={`col-span-3 ${
+            locale == "es" ? "text-lg sm:text-2xl" : "text-2xl sm:text-4xl"
+          } md:col-span-2`}
+        >
+          <div className="text-center scale-[1] space-y-1 bg-purple-500 rounded-3xl flex items-center flex-col justify-center h-full">
             <h2>
               <svg
                 stroke="currentColor"
@@ -542,10 +573,10 @@ export default function Home() {
                 <title></title>
                 <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"></path>
               </svg>{" "}
-              <span>offline</span>
+              <span>{t("discord.off")}</span>
             </h2>
             <p className="text-base">
-              <span>@Hilay</span>
+              <span>@Moontlan</span>
             </p>
           </div>
         </div>
@@ -554,11 +585,11 @@ export default function Home() {
           <a
             href="https://open.spotify.com/playlist/35Uqe0UfZphXoKOpUeSVQz?si=ed7af0e43a85472a"
             target="_blank"
-            className="group h-full flex relative rounded-xl group-hover:scale-95 duration-500"
+            className="group h-full flex relative rounded-3xl group-hover:scale-95 duration-500"
           >
             <span className="h-full absolute inset-0">
               <img
-                className="h-full w-full object-cover flex rounded-xl z-0 brightness-50"
+                className="h-full w-full object-cover flex rounded-3xl z-0 brightness-50"
                 src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c67778112439939.6018520049a7d.jpg"
               />
             </span>
@@ -592,12 +623,10 @@ export default function Home() {
               </span>
               <div className="space-y-0.5">
                 <h2 className="font-light">
-                  playlist:
+                  {t("spotify.title")}
                   <span className="font-semibold block">Kyoto 🌸</span>
                 </h2>
-                <p className="text-sm">
-                  To be chill or just feel it on a car trip.
-                </p>
+                <p className="text-sm">{t("spotify.description")}</p>
               </div>
             </span>
           </a>
