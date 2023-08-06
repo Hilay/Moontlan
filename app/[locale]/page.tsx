@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 
 export default function Home() {
   const [hour, setHour] = useState("");
-  const { resolvedTheme, setTheme } = useTheme();
+  const { resolvedTheme, theme, setTheme } = useTheme();
   const t = useTranslations("Index");
   const router = useRouter();
   const locale = useLocale();
@@ -74,7 +74,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 className="sr-only peer"
-                defaultChecked={resolvedTheme === 'light'}
+                defaultChecked={theme != 'dark'}
                 onChange={() => {
                   setTheme(resolvedTheme == "dark" ? "light" : "dark");
                 }}
