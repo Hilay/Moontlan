@@ -105,15 +105,15 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <div className="group col-span-2 md:col-span-1 grid grid-rows-2 gap-6">
+        <section id="ingles-age" className="group col-span-2 md:col-span-1 grid grid-rows-2 gap-6">
           <a
-            href="#"
+            href="https://www.efset.org/cert/xr6YiY"
             target="_blank"
             className="bg-[#b3c5cb] rounded-3xl flex justify-center items-center group group-hover:scale-90 duration-500"
           >
             <span className="flex flex-col items-center justify-center">
               <p className="text-base">{t("EF")}</p>
-              <h2 className="text-3xl font-semibold">C1</h2>
+              <h2 className="text-3xl font-semibold">B2</h2>
               <p>EF SET</p>
             </span>
           </a>
@@ -124,7 +124,7 @@ export default function Home() {
               {t("age.years")}
             </h2>
           </div>
-        </div>
+        </section>
 
         <div className="group col-span-4 md:col-span-4 flex items-center justify-center rounded-3xl relative">
           <a className="group z-10 h-full w-full md:h-60 group-hover:scale-95 duration-500">

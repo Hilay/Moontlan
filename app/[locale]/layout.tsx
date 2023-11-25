@@ -50,7 +50,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
-          <ThemeProvider defaultTheme="black" attribute="class">
+          <ThemeProvider defaultTheme="dark" attribute="class">
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
