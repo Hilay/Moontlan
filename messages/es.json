@@ -27,5 +27,8 @@
       "description": "para relajarse o un viaje en coche"
     },
     "experience": "AÑOS DE EXPERIENCIA"
+  },
+  "Projects": {
+    "description": "Aquí puedes encontrar todos los proyectos más importantes en los que he participado o que he desarrollado por mí mismo. Echa un vistazo a mi experiencia y descubre mi habilidad más importante como desarrollador full-stack."
   }
 }

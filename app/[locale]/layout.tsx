@@ -51,7 +51,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           <ThemeProvider defaultTheme="dark" attribute="class">
+          <main className="dark:bg-p1 bg-gray-300 min-h-screen flex items-center justify-center relative text-white">
+          <section className="z-50 opacity-[0.03] bg-back fixed inset-0 overflow-hidden pointer-events-none"></section>
             {children}
+          </main>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

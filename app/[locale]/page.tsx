@@ -41,9 +41,6 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="dark:bg-p1 bg-gray-300 min-h-screen flex items-center justify-center relative text-white">
-      <section className="z-50 opacity-[0.03] bg-back fixed inset-0 overflow-hidden pointer-events-none"></section>
-
       <div className="grid grid-cols-6 max-w-5xl px-6 pb-40 pt-20 gap-6">
         <div className="col-span-4">
           <div className="bg-[#f0e8d6] rounded-3xl flex flex-row justify-center items-top h-60 relative">
@@ -127,7 +124,7 @@ export default function Home() {
         </section>
 
         <div className="group col-span-4 md:col-span-4 flex items-center justify-center rounded-3xl relative">
-          <a className="group z-10 h-full w-full md:h-60 group-hover:scale-95 duration-500">
+          <a href="/projects" className="group z-10 h-full w-full md:h-60 group-hover:scale-95 duration-500">
             <img
               className="-z-10 absolute inset-0 h-full object-cover rounded-3xl brightness-50 w-full"
               src="https://cdn.dribbble.com/users/232604/screenshots/2987820/media/5ebee2a752584e615489d0a143006dfe.gif"
@@ -632,6 +629,5 @@ export default function Home() {
           </a>
         </div>
       </div>
-    </main>
   );
 }
